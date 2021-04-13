@@ -1,0 +1,44 @@
+DP => Enhanced Recurison
+            n
+           / \
+        n-1  n-2
+
+--------------------------------------------------------------------------------------------------
+How to Identify DP problems?
+1. DP = Enhanced Recursion => Recursion problems
+2. DP problem => Optimal required  
+
+--------------------------------------------------------------------------------------------------
+Recursion/DP :
+1. Choice in prob. => rescursion lagega (& if overlapping problem hai => DP lagegi) 
+
+if Recurison -> 1 call => not DP prob.
+if Recurison fn -> 2 calls => most of cases mein DP lagegi(if overlapping happen then DP must used)
+
+2. Optimal pauch hai (e.g. max, min, largest, smallest)
+
+--------------------------------------------------------------------------------------------------
+How to write DP sol?
+
+DP ka parent kon hai => Recursion
+
+First write : Recursion -> Memoize -> Top-down
+
+                      [Recursion] <= must
+                        /    \
+                Memoization  Top-down(matlab Table banana) 
+
+--------------------------------------------------------------------------------------------------
+DP problems and no. of their variations.
+1. 0-1 Knapsack[6 -> subset sum, equal sum partition, count of subset sum etc]
+2. Unbounded Knapsack [5]  
+3. Fibonacci [7]
+4. LCS [15]
+5. LIS [10]
+6. Kadane's Algorithm [6]
+7. Matrix Chain Multiplication [7]
+8. DP on Trees [4]
+9. Dp on Grid [14]
+10. Others [5]
+
+
