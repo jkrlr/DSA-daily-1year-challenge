@@ -1,0 +1,32 @@
+            0-1 Knapsack problem
+
+1) Subset sum
+2) Equal Sum Partition
+3) Count of Subset Sum
+4) Minimum Subset Sum Difference
+5) Target Sum
+6) # of Subset of sigma given del/f 
+
+--------------------------------------------------------------------------------------
+            Knapsack problem
+            /       |       \
+    Fractional     0/1     Unbounded
+    Knapsack     Knapsack   Knapsack    
+        / 
+  (Greedy Approach)
+
+--------------------------------------------------------------------------------------
+0-1 Knapsack problem
+
+Identify:
+        1) Choice (yes -> value ke wt. ko include karo ya na karo)
+        2) Optimal (yes -> max profit pacuha hai)
+
+Hence, Proved => DP -> Recursion
+
+DP : Recursive Soln -> Memoization -> Top-down(optional hai kro ya mat kro)
+                           (DP)          (DP)
+
+[DP = Recursion + Storage]
+                  /      \
+        Memoization     Top-down
