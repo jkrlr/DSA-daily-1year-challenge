@@ -1,0 +1,55 @@
+Euclid Algorithm and Modular arithmetic
+Euclid division algorithm is used to calculate 
+GCD of 2 numbers in O(log(max(A , B)) time complexity
+
+--------------------------------------------------------------------------
+-> Euclid Division Lemma
+
+For positive integers A and B,
+there exist an integer q and r such that
+A = B*q+r    where 0<=r<B
+
+
+---------------------------------------------------------------------------
+-> Modular Airthmetic
+
+(N1 + N2)%mod = (N1%mod + N2%mod)%mod
+(N1 * N2)%mod = (N1%mod * N2%mod)%mod
+
+Proof:
+N1 = mod*q1 + r1
+N2 = mod*q2 + r2
+
+(N1 + N2)%mod = (mod*q1 + r1  + mod*q2 + r2)%mod
+              = (0 + r1 + 0 + r2)%mod
+              = (r1 + r2)%mod
+              = ((N1 % mod) + (N2 % mod))%mod
+
+
+----------------------------------------------------------------------------
+-> Euclid Division Algorithm
+
+Euclid algorithm can be used to calculate  GCD(HCF) of 2 numbers say A and B 
+
+gcd(a,b) = {a,                  if b=0
+            gcd(b,a mod b),     otherwise}
+
+
+int gcd (int a, int b){
+    if(b==0)
+        return a;
+    else
+        return gcd(b, a%b);
+}
+
+
+-> Observations:
+
+Let GCD of A and B = g
+Observation 1: GCD(A,0) = GCD(0,A) = A
+Observation 2: GCD(A,B) = GCD(B,A)
+Observation 3: GCD(A,B) = GCD(A-B,B) = GCD(A,B-A)
+
+Let A = g*X         B = g*Y
+A - B = g(X-Y)
+A + B = g(X+Y)
