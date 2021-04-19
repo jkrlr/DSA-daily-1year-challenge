@@ -1,0 +1,17 @@
+=> Daimeter of the Tree
+
+-> What is Daimeter of Tree ?
+It is defined as the longest path between any 2 nodes in the tree. 
+
+-> Novice Approach
+We would run DFS, N times
+In each iteration, we would set ith node as root and find farthest node.
+Running Time : O(N^2)
+
+-> Better Approach
+We can find diameter in only 2 DFS run.
+Take any arbitrary node as root and dfs from it and find the farthest node,
+let this node be x.
+Run a dfs from node x and find the maximum distance from this node to any other node,
+this diameter is diameter.
+
