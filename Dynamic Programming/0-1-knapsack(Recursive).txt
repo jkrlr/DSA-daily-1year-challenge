@@ -1,0 +1,94 @@
+0-1 Knapsack Recursive
+
+----------------------------------------------------------------------------------------------------------
+Identify :
+
+DP -> Recursive -> Choice
+        /   \
+  Top-Down  Memoization
+
+Input-> Wt [] : 1 3 4 5
+        Val[] : 1 4 5 7
+        W     : 7
+
+Output -> MaxProfit
+
+----------------------------------------------------------------------------------------------------------
+-> Next Step to make Choice Diagram : This step is Very Very Important
+Recursive Code -> Choice Diagram
+
+                Item 1(W)
+                /      \      
+            W1<=W        W1>W             
+           /   \            | 
+    Include  Can't Include  Can't Include                   
+
+-> First make prototype of function
+
+MaxProfit(Return Type)                              Input
+\                                                  / 
+[int] Knapsack([ int Wt[], int Val[], int W, int n ])
+{
+    [Base Condition]
+
+    [Choice Diagram]
+}
+
+----------------------------------------------------------------------------------------------------------
+How to write Base Condition ?
+
+For Base Condition =>[ Think of the smallest *valid* Input ]
+
+Input-> Wt [] : X X X X -> n->0
+        Val[] : 1 4 5 7 
+        W     : 7 -> W->0(can't take -1, we have to take valid value also)
+
+For smallest valid Input -> write the Output(MaxProfit in this case) in Return Condition of base case
+
+If(n==0 || w==0)
+    return 0
+
+----------------------------------------------------------------------------------------------------------
+For Recursion : [Recursive function always call to smaller inputs]
+
+function(I/P) -> function(smaller I/P)
+e.g. Fib(n) -> Fib(n-1) ->
+
+In this we'll small the size of Wt array and Val array from back 
+i.e. from last index of array(means if size is n and we're starting from index=0, then endindex is= n-1) 
+(by deciding that this element should be Included or not) -> until we can achieve our ans or the array is empty
+
+                Item 1(W)
+                /      \      
+        W1<=W(Case1)    W1>W (Case2)            
+           /   \            | 
+    Include  Can't Include  Can't Include   
+
+
+Case1 code :
+    if(Wt[n-1]<=W)
+        return max(
+            Val[n-1] + Knapsack(Wt, Val, W-Wt[n-1], n-1) -> When we aren't include wt.
+            Knapsack(Wt, Val, W, n-1) -> When we aren't include wt.
+        )
+
+Case2 code :
+    if(Wt[n-1]>W)
+        return Knapsack(Wt, Val, W, n-1)
+
+----------------------------------------------------------------------------------------------------------
+int Knapsack(int Wt[], int Val[], int W, int n){
+	if(n==0 || w==0)
+		return 0;
+
+	if(Wt[n-1]<=W){
+		return max(Val[n-1]+Knapsack(Wt,Val,W-Wt[n-1],n-1),
+					Knapsack(Wt, Val, Wt, n-1));
+	}
+	else if(Wt[n-1]>W)
+		return Knapsack(Wt, Val, Wt, n-1);
+}
+
+
+
+
