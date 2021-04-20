@@ -1,0 +1,85 @@
+-> Memoization is alternative of Top-Down(Matrix formation)
+
+Recursive Code Writing is very Easy
+After Writing Recursive Code -> we've to add 2 extra lines in code for Memoization
+
+Recursion + Memoization(2 extra lines) = DP (and its complexity is same as Top-Down)
+
+---------------------------------------------------------------------------------------------------------------------------------
+int Knapsack(int Wt[], int Val[], int W, int n){
+	if(n==0 || w==0)
+		return 0;
+
+	if(Wt[n-1]<=W){
+		return max(Val[n-1]+Knapsack(Wt,Val,W-Wt[n-1],n-1),
+					Knapsack(Wt, Val, Wt, n-1));
+	}
+	else if(Wt[n-1]>W)
+		return Knapsack(Wt, Val, Wt, n-1);
+}
+
+Let's first see the table formation -> we can call it 't' or 'dp'
+t dimension is = n x m
+Now, what is n and m in dimension?
+
+=> We've to make 't' for only those variables that are changing in the function Input.
+
+Knapsack(Wt[], Val[], W, n)
+                      /   \
+                W-Wt[n-1]  n-1  
+
+In this case in our function Knapsack only the W and n is changing.
+So, We're making Matrix only for these variables (W and n)
+
+If we take n in Matrix then it can store values from 0 to n-1.
+But we've to store till n (from 0 to n).
+So, We're taking the size of array to be n+1.
+Same thing for W also.
+
+---------------------------------------------------------------------------------------------------------------------------------
+int t[n+1][w+1]
+
+First we've to initialize the whole Matrix to be -1 .
+memset(t, -1, sizeof(t))
+
+Then, Before calling to Recursive function.
+First Check whether the value is present(not equal to -1 that means a *valid* value is present) in Matrix or not.
+If present -> don't call Recursive function -> return value from table.
+If not present -> call the Recursive function and store the value in 't' and return that value.
+
+---------------------------------------------------------------------------------------------------------------------------------
+What changes we should do in our Recursive Code?
+
+->First make a global Matrix 't' for dimension size of 't' see from constraints(take MaxSize).
+e.g. int t[102][1002];                 given n<=100, w<=1000
+for safety purpose we're taking 102 instead of taking 101.
+
+-> Then in main function by calling memset set all values of Matrix of be -1.
+memset(t,-1,sizeof(t));
+
+---------------------------------------------------------------------------------------------------------------------------------
+int t[n+1][w+1];
+
+int Knapsack(int Wt[], int Val[], int W, int n){
+	if(n==0 || w==0)
+		return 0;
+
+	if(t[n][w]!= -1)
+        return t[n][w];
+
+	if(Wt[n-1]<=W){
+		return t[n][w] = max(Val[n-1]+Knapsack(Wt,Val,W-Wt[n-1],n-1),
+					Knapsack(Wt, Val, Wt, n-1));
+	}
+	else if(Wt[n-1]>W)
+		return t[n][w] = Knapsack(Wt, Val, Wt, n-1);
+}
+
+Now, this code is DP(Recursion + Memoization)
+
+-> Sometimes Memoization is Better and
+   Sometimes Top-Down is Better(Because in Memoization, We're calling Recursive functions in Memoization -> So, In Rare cases it may have overflow of stack).
+
+
+
+
