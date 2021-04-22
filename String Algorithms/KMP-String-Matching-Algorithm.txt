@@ -1,0 +1,80 @@
+Knuth-Morris-Pratt(KMP) String Matching Algorithm
+
+---------------------------------------------------------------------------------------------------------------------------
+KMP algorithm depends upon prefix function for its implementation.
+Prefix function or pi function has below definition.
+Pi(i)=length of longest proper prefix of substring(0,i) which is also a suffix
+(Here, proper means not equal to actual string, By definition Pi(0)= 0)
+
+---------------------------------------------------------------------------------------------------------------------------
+Prefix Function 
+
+String          : a b c a b c d 
+Prefix function : 0 0 0 1 2 3 0
+
+String          : a a b a a a b 
+Prefix function : 0 1 0 1 2 2 3
+
+vector<int> prefix_function(string s) {
+    int n = (int)s.length();
+    vector<int> pi(n);
+    for (int i = 0; i < n; i++)
+        for (int k = 0; k <= i; k++)
+            if (s.substr(0, k) == s.substr(i-k+1, k))
+                pi[i] = k;
+    return pi;
+}
+
+---------------------------------------------------------------------------------------------------------------------------
+Important Observation
+
+The first Important observation is that the values of the prefix function can only increase
+by at most one.
+
+pi(i+1)<=pi(i)+1
+
+String          : a a b a a a b 
+Prefix function : 0 1 0 1 2 2 3
+
+
+---------------------------------------------------------------------------------------------------------------------------
+Efficient Calculation of prefix function
+
+The complexity is cubic because we need to compare each character of the substring.
+Can we bypass comparison?
+
+Improvement
+
+String   a a b c a a b c _
+Pi(i)    0 1 0 0 1 2 3 
+
+
+if(S[pi(i-1)] == S[i])
+    pi(i) = pi(i-1) + 1
+
+what if S[pi(i-1)]!=S[i]
+
+
+String   a a b a a a b a X
+Pi(i)    0 1 0 1 2 2 3 4
+
+a a b a X               Longest proper suffix of "aaba"
+  a b a X               which is also a prefix
+    b a X
+      a X
+        X
+
+---------------------------------------------------------------------------------------------------------------------------
+vector<int> prefix_function(string s) {
+    int n = (int)s.length();
+    vector<int> pi(n);
+    for (int i = 1; i < n; i++) {
+        int j = pi[i-1];
+        while (j > 0 && s[i] != s[j])
+            j = pi[j-1];
+        if (s[i] == s[j])
+            j++;
+        pi[i] = j;
+    }
+    return pi;
+}
