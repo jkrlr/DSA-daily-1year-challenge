@@ -54,15 +54,15 @@ Permutation after Kth cyclic shift = (K % N)th cyclic shift
 ----------------------------------------------------------------------------------------------------------------------------------------
 -> Naive Approach :
 
-Let's find the cos of ith right cyclic shift using Naive Approach
+Let's find the cost of ith right cyclic shift using Naive Approach
 
                              Cost                                   void calculate(int N){
-0th cyclic shift : 2 4 1 3 5 (3)                                        for(int i=0;i<N;i++){
+0th cyclic shift : 2 4 1 3 5 (4)                                        for(int i=0;i<N;i++){
 1st cyclic shift : 5 2 4 1 3 (4)                                            int cnt =0;
-2nd cyclic shift : 3 5 2 4 1 (3)                                            for(int j=1;j<=N;j++){
+2nd cyclic shift : 3 5 2 4 1 (4)                                            for(int j=1;j<=N;j++){
 3rd cyclic shift : 1 3 5 2 4 (5)                                                if(ar[j]!=j)
-4th cyclic shift : 4 1 3 5 2 (5)                                                    cnt++;
-5th cyclic shift : 2 4 1 3 5 (3)
+4th cyclic shift : 4 1 3 5 2 (4)                                                    cnt++;
+5th cyclic shift : 2 4 1 3 5 (4)
                                                                                 cost[i] = cnt;
                                                                                 rightShift(N);
                                                                             }
@@ -87,19 +87,19 @@ If in the ith cyclic shift, k elements are on their correct positions, then cost
 
 Hence to minimize cost, we need to maximize k 
 
-0th cyclic shift : 2 4 1 3 5                                        
+0th cyclic shift : 2 4 3 1 5                                        
                    1 2 0 2 0 <-No. of right shifts required to reach the given elemnt a correct position
                                                                    
 
 => For element j, the no. of cyclic shift needed to reach at it's correct position = (j-pos[j]+N)%N
 
                                                                                                                                 Cost                                   
-                                                                                                    0th cyclic shift : 2 4 1 3 5 (3)                                        
+                                                                                                    0th cyclic shift : 2 4 1 3 5 (4)                                        
                                                                                                     1st cyclic shift : 5 2 4 1 3 (4)                                           
-                                                                                                    2nd cyclic shift : 3 5 2 4 1 (3)                                            
+                                                                                                    2nd cyclic shift : 3 5 2 4 1 (4)                                            
                                                                                                     3rd cyclic shift : 1 3 5 2 4 (5)                                                
-                                                                                                    4th cyclic shift : 4 1 3 5 2 (5)                                          
-                                                                                                    5th cyclic shift : 2 4 1 3 5 (3)
+                                                                                                    4th cyclic shift : 4 1 3 5 2 (4)                                          
+                                                                                                    5th cyclic shift : 2 4 1 3 5 (4)
 
 For getting the required ans, we have to find the maximum frequency of element(value of k) of array formed by
-(No. of right shifts required to reach the given elemnt a correct position -> frequencies)
+(No. of right shifts required to reach the given element a correct position -> frequencies)
