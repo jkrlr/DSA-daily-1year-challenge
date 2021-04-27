@@ -30,3 +30,17 @@ DP : Recursive Soln -> Memoization -> Top-down(optional hai kro ya mat kro)
 [DP = Recursion + Storage]
                   /      \
         Memoization     Top-down
+
+--------------------------------------------------------------------------------------
+How to Identify Knapsack problems?
+
+If you have given an array of Items and 
+a Capacity is given(to maximize or minimize). 
+Then, problem is a version of Knapsack.
+
+Because in Knapsack we've given an array of items(having two properties Value and Weight)
+and a Bag is given for maximizing Capacity.
+
+But in some cases it is possible that we've given only one array,
+for such cases we consider that single array to be like Weight array.
+
