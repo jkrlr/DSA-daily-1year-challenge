@@ -1,0 +1,66 @@
+Top-Down => only Table (No Recursion)
+
+In Top-Down we're converting Recursive code into interative code.
+
+-----------------------------------------------------------------------------------------------------------------
+-> How to Create Table ?
+
+Table : t[n+1][w+1]
+
+Step:1 Initialization
+Step:2 Conversion of Recursive calls into interation
+
+-----------------------------------------------------------------------------------------------------------------
+Base Condition of Recursive function -> Changes into Initialization
+(n,w) -> changes to (i,j)
+
+Recursive code of Base Condition :
+                 if(n==0 || w==0)
+                    return 0;
+
+Top-Down(Iterative code) :
+                 for(int i=0;i<n+1;i++)
+                    for(int j=0;j<w+1;j++)
+                        if(i==0 || j==0)
+                            t[i][j]=0;              (n==0 || w==0) -> (i==0 || j==0)
+
+-----------------------------------------------------------------------------------------------------------------
+(n,w) -> changes to (i,j)
+knapsack(wt, val, n, w) -> changes to t[n][w]
+
+Recursive :
+            if(wt[n-1]<=w)
+                return max(val[n-1] + knapsack(wt, val, w-wt[n-1], n-1), knapsack(wt, val, w, n-1));
+            
+            else if(wt[n-1]>w)
+                return knapsack(wt, val, w, n-1);
+
+Top-Down :
+            if(wt[n-1]<=w)
+                t[n][w] = max(val[n-1] + t[n-1][w-wt[n-1]], t[n-1][w]);
+
+            else if(wt[n-1]>w)
+                t[n][w] = t[n-1][w];
+
+-----------------------------------------------------------------------------------------------------------------
+Since, We've already filled the (0,0) values(i.e. all values of 0th row and 0th column) in Initialization.
+So, we're starting our table filling loop from (1,1).
+
+n-> changes to i and  w-> changes to j
+
+Now, Add loops in code.
+
+    for(int i=1;i<n+1;i++)
+        for(int j=1;j<w+1;j++)
+        {
+            if(wt[i-1]<=j)
+                t[i][j] = max(val[i-1] + t[i-1][j-wt[i-1]], t[i-1][j]);
+            else
+                t[i][j] = t[i-1][j];
+        }
+
+    return t[n][w];    (At last return t[n][w])
+
+
+
+
