@@ -1,0 +1,19 @@
+What is Merge Sort Tree & why we need it 
+
+Before explaining whia is merge sort tree let's see some of the problems,
+where segment tree may not be helpful.
+
+---------------------------------------------------------------------------------------------
+Problem : 1
+            Given an array of size N and Q queries of form L R K, find the number of elements
+            in the range L to R which are strictly smaller than K.
+
+Problem : 2
+            Given an array of size N and Q queries of form L R, find the number of unique elements
+            in the range L to R.
+
+---------------------------------------------------------------------------------------------
+Problems that can be solved using Merge Sort Tree.
+
+https://www.hackerrank.com/challenges/coloring-tree/problem
+https://codeforces.com/problemset/problem/893/F
