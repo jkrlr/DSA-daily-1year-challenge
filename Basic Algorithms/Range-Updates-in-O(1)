@@ -1,0 +1,62 @@
+Range Updates in O(1)
+
+-----------------------------------------------------------------------------------------------------------------
+-> About the Algorithm & Important condition
+
+Given an array of N integers and Q queries of 2 types.
+
+Type 1 : L R X (add X to all elements in range L to R inclusive)
+Type 2 : idx (print the value of integer at index idx)
+
+Possible Approach : Using segment Tree Type 1 query can be performed in O(LogN) time (lazy propagation)
+                    and Type 2 query can be answered in O(LogN) time too.
+
+Question : Does anything changes if I say all Type 1 queries are before Type 2 queries?
+
+-----------------------------------------------------------------------------------------------------------------
+-> Performing Updates in O(1) time
+
+To performe updates in O(1) time we need an extra arry of same size as input.
+
+Input Array  : 5 1 3 6 4 2 8 1 1 9
+Update Array : 0 0 0 0 0 0 0 0 0 0
+
+-----------------------------------------------------------------------------------------------------------------
+query : 3 5 5
+
+Input Array  : 5 1 3 6 4  2 8 1 1 9
+Update Array : 0 0 5 0 0 -5 0 0 0 0
+
+Update Array[L]+=X
+Update Array[R+1]-=X
+
+query : 5 7 2
+
+Input Array  : 5 1 3 6 4  2 8  1 1 9
+Update Array : 0 0 5 0 2 -5 0 -2 0 0
+
+-----------------------------------------------------------------------------------------------------------------
+Input Array  : 5 1 3 6 4  2 8  1 1 9                        3 5 5
+Update Array : 0 0 5 0 2 -5 0 -2 0 0                        5 7 2
+
+cnt=0
+
+Input Array  : 5 1 8 11 4  2 8  1 1 9
+Update Array : 0 0 5 0  2 -5 0 -2 0 0
+
+cnt=5
+
+Input Array  : 5 1 8 11 11  2 8  1 1 9
+Update Array : 0 0 5 0  2  -5 0 -2 0 0
+
+cnt=7
+
+Input Array  : 5 1 8 11 11  4 10  1 1 9
+Update Array : 0 0 5 0  2  -5  0 -2 0 0
+
+cnt=2
+
+Input Array  : 5 1 8 11 11  4 10  1 1 9
+Update Array : 0 0 5 0  2  -5  0 -2 0 0
+
+cnt=0
