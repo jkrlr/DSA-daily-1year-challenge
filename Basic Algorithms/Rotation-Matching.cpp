@@ -1,13 +1,15 @@
 // C. Rotation Matching
 // https://codeforces.com/contest/1365/problem/C
 
+// For Identity Array i.e. ar = {1,2,3,4.......}
+// For element j, the no. of cyclic shift needed to reach at it's correct position = (j-pos[j]+N)%N
+
+//  Cyclic shift needed : (final_pos[j]-initialpos[j]+N)%N (Here, pos[j] is initialpos[j])
 
 #include<bits/stdc++.h>
 #define REP(i,n) for (int i = 1; i <= n; i++)
 #define mod 1000000007
 #define pb push_back
-#define ff first
-#define ss second
 #define ii pair<int,int>
 #define vi vector<int>
 #define vii vector<ii>
@@ -18,44 +20,29 @@
 
 using namespace std;
 
+int freq[200001];
+int pos[200001];
+
 int main()
-{       
-
-	int maxF_a=0,maxF_b=0;
-	int a[200002], b[200002];
-
-
-    int n;
-    cin>>n;
-
-    for(int i=1;i<=n;i++)
-    	cin>>a[i];
-    for(int i=1;i<=n;i++)
-    	cin>>b[i];
-
-    map<lli,lli> Freq_a, Freq_b;
+{
+    int n, x, y, ele, mx = 0;
+    cin >> n;
 
     for(int i=1;i<=n;i++){
-    	lli cost_a = (a[i] - i + n)%n; 
-    	lli cost_b = (b[i] - i + n)%n; 
+        cin >> ele;
+        pos[ele] = i;
+    }
+    for (int i = 1; i <= n; i++){
+        cin>>ele;
+        x = i;
+        y = pos[ele];
 
-    	Freq_a[cost_a]++;
-    	Freq_b[cost_b]++;
+        freq[(y - x + n) % n]++;
     }
 
-    for(auto f:Freq_a){
-    	if(maxF_a<f.second)
-    		maxF_a=f.second;
+    for(int i=0;i<=n;i++){
+        mx = max(mx, freq[i]);
     }
 
-    for(auto f:Freq_b){
-    	if(maxF_b<f.second)
-    		maxF_b=f.second;
-    }
-
-    lli ans = min(maxF_a,maxF_b);
-
-    cout<<ans<<endl;
-
-    return 0;
+    cout << mx;
 }
