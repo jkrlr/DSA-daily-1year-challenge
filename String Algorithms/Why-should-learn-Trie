@@ -1,0 +1,22 @@
+-> Applications
+
+1. Auto Complete
+2. Spell Checker
+3. Longest Prefix Matching
+4. String Search in O(L) time where L is length of String to be searched
+
+Problem can be solved using Trie DS:
+https://codeforces.com/problemset/problem/706/D
+
+----------------------------------------------------------------------------------------------------------------------------
+Auto Complete
+
+                       ( )                       Entered    : ba
+                       / \                       Suggestion : bad or back 
+                      b   c 
+                     /     \
+                    a       a 
+                   / \     / \
+                  d   c   t   r 
+                       \
+                        k
