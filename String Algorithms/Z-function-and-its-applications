@@ -1,0 +1,93 @@
+Z-function and its applications
+https://cp-algorithms.com/string/z-function.html
+
+Do -> Practise Problems :
+
+https://www.codechef.com/problems/CHSTR
+https://codeforces.com/problemset/problem/126/B
+https://codeforces.com/problemset/problem/432/D
+
+---------------------------------------------------------------------------------------------------------------
+-> Z - Function 
+Z - Function for a string S is defined as an arry of length n(assuming string length is n),
+Where the i-th element is equal to the greatest number of elements starting from
+index i that coincide with the first character of S.
+
+a b a b b       Z[2]=2 , Z[3]=0, Z[4]=0
+    / /
+   / /
+  / /
+ / /
+a b
+
+
+---------------------------------------------------------------------------------------------------------------
+-> Naive Approach : Time Complexity = O(n^2)
+
+in z[2000];
+
+void z_function(string S){
+    z[0]=0;
+    int n=S.size();
+
+    for(int i=1;i<n;i++){
+        for(int j=i;j<n;j++){
+            if(S[j-i]==S[j])
+                z[i]++;
+            else
+                break;
+        }
+    }
+}
+
+---------------------------------------------------------------------------------------------------------------
+-> Terminologies
+
+Segment Match : A substring which matches with prefix of the input string.
+
+0 1 2 3 4 5 6 7
+a b c a d a b c
+    a     a b c 
+    L=3   L=5
+    R=3   R=7
+
+[L, R]  : Rightmost segment match.
+
+0 1 2 3 4 5 6 7
+a a c a d a a c
+  a   a   a a c 
+  L=1 L=3 L=5
+  R=1 R=3 R=7
+
+0 1 2 3 4 5 6 7
+a a a a a a a a 
+0 7 ?
+  L=1
+  R=7
+
+? = R-i+1 not Z[i-L] i.e.  Z[i]= min(R-i+1, Z[i-L])
+
+---------------------------------------------------------------------------------------------------------------
+-> Efficient Approach : Time Complexity = O(n)
+
+in z[2000];
+
+void z_function(string S){
+    z[0]=0;
+    int n=S.size();
+
+    for(int i=1, L=0, R=0; i<n; i++){
+        if(i<=R)
+            z[i] = min(R-i+1, z[i-L]);
+        
+        for(int j=i;j<n;j++){
+            if(S[j-i]==S[j])
+                z[i]++;
+            else
+                break;
+        }
+
+        if(i+z[i]-1 > R)
+            L=i, R=i+z[i]-1;
+    }
+}
