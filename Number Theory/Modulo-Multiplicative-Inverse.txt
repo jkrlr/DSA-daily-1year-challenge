@@ -1,0 +1,105 @@
+=> Modulo Multiplicative Inverse
+
+-> Need of Modulo Multiplicative Inverse
+(A+B)%P = ((A%P) + (B%P))%P
+(A*B)%P = ((A%P) * (B%P))%P
+
+But is it also true for division?
+(A/B)%P = ((A%P) / (B%P))%P
+
+(6/2)%5 = ((6%5) / (2%5))%5
+        = (1 / 2)%5
+        = (0)%5
+        = 0     (Which is wrong , correct ans is 3)
+
+-----------------------------------------------------------------------------------------------------------------------
+-> Inverse before Modulo Inverse
+
+10/5 = 10*Multiplicative Inverse of 5
+     = 10*(1/5)
+     = 10*(0.2)
+
+Question : can we find modulo inverse of B(let's call it X) and replace '/' with '*'?
+
+(A/B)%P = (A*X)%P = ((A%P) * (X%P))%P
+
+-----------------------------------------------------------------------------------------------------------------------
+-> How to find Modulo Inverse
+
+To answer this question think about Multiplicative Inverse
+5*(1/5) = 1
+
+Modulo Multiplicative Inverse of a number N, under modulo P is defined to be a number X such that
+N*X ≡ 1 (mod P)
+
+Modulo Multiplicative Inverse of 5, under modulo 7 is 3 since
+5*3 ≡ 1 (mod 7)
+
+-----------------------------------------------------------------------------------------------------------------------
+-> Modulo Multiplicative Inverse
+
+(6/2)%5 = (6*3)%5 = ((6%5) * (3%5))%5
+                  = (1 * 3)%5
+                  = 3
+
+-----------------------------------------------------------------------------------------------------------------------
+-> Do all numbers have Modulo Inverse?
+
+The answer to this question is NO!
+
+12 has no modulo inverse under modulo 6
+
+Modulo Inverse of N, under modulo P exist iff GCD(N,P)=1
+
+-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------
+=> Finding Modulo Inverse
+
+-> Ways to calculate Modulo Inverse
+
+There are 2 different ways to calculate modulo inverse efficiently.
+1. using Fermat's little theorem
+2. using Extended Euclidean Algorithm
+
+-----------------------------------------------------------------------------------------------------------------------
+-> Fermat's little theorem
+
+For a prime number 'm' Which is coprime(Means GCD(a,m) is 1) with an interger 'a'. The below condition holds  
+a^(m-1) ≡ 1 mod m 
+
+Now, divides both sides with a,
+a^(m-2) ≡ a^-1 mod m          (Which is a^-1 under mod m)
+
+-----------------------------------------------------------------------------------------------------------------------
+-> Implementation : Time Complexity = O(LogN)
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+
+int power(int a, int n, int m){
+    int res =1;
+
+    while(n){
+        if(n%2)
+            res=(res*a)%m , n-- ;
+        else
+            a=(a*a)%m , n/=2;
+    }
+
+    return res;
+}
+
+int main(){
+    int t, a, m ;
+    cin>>t;
+
+    while(t--){
+        cin>>a>>m;
+        cout<<"a^-1 = "<<power(a, m-2, m)<<endl;
+    }
+
+    return 0;
+}
+
