@@ -1,0 +1,74 @@
+Count of subsets with sum equal to X
+https://www.geeksforgeeks.org/count-of-subsets-with-sum-equal-to-x/
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Flow :
+-> Problem Statement
+-> Similarity to Subset Sum 
+-> Code Variation
+    /           \
+Initialization  Code
+-> Return Type 
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> Problem Statement :
+Given an array arr[] of length N and an integer X, the task is to find the number of subsets with sum equal to X.
+(all numbers of array is equal to >=0)
+Example:
+
+Input: arr[] = {2, 3, 5, 6, 8, 10}, X = 10
+Output: 3
+All the possible subsets are {2, 8}, {2, 3, 5} and {10}
+
+-> Return Type : int (changes from boolean to int)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> Similarity to Subset Sum :
+
+KnapSack : t[n+1][w+1]
+Subset   : t[n+1][sum+1]   arr-> wt-arr , w->sum 
+
+cnt Subset : t[n+1][sum+1]
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> Code Variation :
+
+Initialization :
+
+{ ? }/ T -> >0 (count)
+     \ F -> 0
+
+First row of t[n+1][w+1] with -> t[0][w+1] = 0
+First column of t[n+1][w+1] with -> t[n+1][0] = 1 (means empty subset i.e. { } and it's cnt = 1)
+and t[0][0] = 1
+
+
+
+
+Code : 
+            if(A[i-1]<=j)
+                t[i][j] = (t[i-1][j-A[i-1]] + t[i-1][j]);    -> Instead of '||' symbol -> put '+' symbol, bcoz return type is changes from boolean -> int 
+            else
+                t[i][j] = t[i-1][j];
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    int t[n + 1][sum + 1];
+
+    for(int i=0;i<=n;i++){
+        for(int j=0; j<=sum;j++){
+            if(i==0)
+                t[i][j]=0;
+            if(j==0)
+                t[i][j]=1;
+        }
+    }
+    
+    for(int i=1;i<=n;i++){
+        for(int j=1; j<=sum;j++){
+            if(ar[i-1]<=j)
+                t[i][j] = (t[i-1][j-ar[i-1]] + t[i-1][j]);
+            else
+                t[i][j] = t[i-1][j];
+        }
+    }
+    
+    return t[n][sum];
