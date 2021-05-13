@@ -1,0 +1,56 @@
+-> Structure of Trie & how insertion , search works
+
+-------------------------------------------------------------------------------------------------------------------------------------
+-> Structure of Trie :
+
+Trie Data Structure has k-n ary structure, in other words it is a k-n ary tree.
+Value of k depends upon size of the character set.
+
+                       ( )           
+                       / \                       
+                      ()  () 
+                     /  
+                    ()\       
+                   / \ ()    
+                  ()  ()  
+                      / \
+                     ()  ()
+-------------------------------------------------------------------------------------------------------------------------------------
+Example :
+
+                       ( )                       Words: 
+                       / \                        1. bad   
+                      b   c                       2. back
+                     /     \                      3. car
+                    a       a                     4. cat 
+                   / \     / \
+                  d   c   t   r 
+                       \
+                        k
+
+-------------------------------------------------------------------------------------------------------------------------------------
+-> Binary Trie :
+                       ( )                       Words: 
+                       / \                        1. 000   
+                      0   1                       2. 111
+                     /     \                      3. 110
+                    0       1                      
+                   /       / \
+                  0       0   1 
+
+https://codeforces.com/problemset/problem/706/D
+https://codeforces.com/contest/706/submission/40885678
+             
+-------------------------------------------------------------------------------------------------------------------------------------
+-> Node Structure :
+
+const int SIZE = 26;
+
+struct node{
+    int count;
+    bool endOfWord;
+    node* ar[SIZE];
+};
+
+
+
