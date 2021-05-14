@@ -1,0 +1,51 @@
+=> Total divisors from prime factorization
+
+---------------------------------------------------------------------------------------------------------------------------
+-> Problem Statement :
+find total number of divisors from prime factorization of a number N.
+
+Example:
+N=300
+N=2^2*3^1*5^2
+Total divisors = 18
+
+---------------------------------------------------------------------------------------------------------------------------
+-> Motivation for Problem :
+Given a number's prime factorization, find total number of divisors and print it Modulo 10^9+7.
+
+Example:
+3
+2  1000
+3  1500
+13 1000000
+
+Since, this number is very large even long long int(2^63), can't hold it.
+So, we can't go with first calculate the number and then find it's divisors in O(sqrt(N)) time approach.
+So, we've to study this method for finding divisors, when prime and it's power's are given.
+
+---------------------------------------------------------------------------------------------------------------------------
+-> Problem Approach :
+
+N = P1^y1 * P2^y2 * P3^y3 *...Pn^yn
+
+Total divisors = (y1+1)*(y2+1)*(y3+1)*...*(yn+1)
+
+N=300
+N=2^2*3^1*5^2
+
+Total divisors = (2+1)*(1+1)*(2+1)
+               = 18
+
+---------------------------------------------------------------------------------------------------------------------------
+-> Why this works ?
+
+N = P1^y1 * P2^y2 * P3^y3 *...Pn^yn
+
+For first divisor P1, 
+                     We've choice that we can take it, 0 power or 1 power or 2 powers or ...n powers.
+                     while calculating the divisors, So we have (0 or 1 or 2 or ... n)choices.
+                     => Total choices for P1 = (y+1).
+
+Similary for P2, P3,....Pn
+
+So, Total divisors = (y1+1)*(y2+1)*....(yn+1)
