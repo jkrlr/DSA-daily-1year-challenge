@@ -1,6 +1,7 @@
 // Majority Element
 // https://leetcode.com/problems/majority-element/
 
+// Time Complexity = O(n) and Space Complexity = O(n) (for storing hash maps)
 class Solution {
 public:
     int majorityElement(vector<int>& ar) {
@@ -23,6 +24,31 @@ public:
         }
 
         return ans;
+        
+    }
+};
+
+// Time Complexity = O(n) and Space Complexity = O(1)
+class Solution {
+public:
+    int majorityElement(vector<int>& ar) {
+
+        int cnt=0;
+        int ele;
+        for(int num:ar){
+            if(cnt==0){
+                ele=num;
+                cnt++;
+            }
+            else if(num==ele)
+                cnt++;
+            else{
+                cnt--;
+            }
+        }
+        
+
+        return ele;
         
     }
 };
