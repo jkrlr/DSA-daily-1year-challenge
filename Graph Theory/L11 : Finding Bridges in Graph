@@ -1,0 +1,135 @@
+L11 : Finding Bridges in Graph
+The complexity of the algorithms is O(V+E)
+--------------------------------------------------------------------------------------------------------
+Bridges : Definition
+A bridge is defined as an edge which when removed makes graph disconnected
+or more precisely it increases the number of connected components.
+
+--------------------------------------------------------------------------------------------------------
+        0
+       / 
+      O 
+     / \
+    O   O
+     \ / \
+      O   0
+-------------------
+        0
+        
+      O 
+     / \
+    O   O
+     \ / 
+      O   0
+
+--------------------------------------------------------------------------------------------------------
+-> Important Concept : DFS Tree 
+
+        O----\
+       / \ \  O 
+      O   \ \ /
+     / \   \ O 
+    O---O   O
+           //\\
+          / / \ \
+         O-O  O--O 
+        /  \
+       O    O
+
+Forward edges : Those edges which get traversed while making recursive dfs calls.
+Back edges    : Those edges which didn't get traversed while making recursive dfs calls.
+
+Observation : A Back edge connects a node to its ancestor which is not its direct parent(atleast grand parent or above).
+              A Back edge can never be a Bridge
+              or simply we can say when their is a Back edge -> their exist a cycle.
+              Hence, Forward edges are only candidates of bridges.
+              
+--------------------------------------------------------------------------------------------------------
+DFS Tree : Implementation
+
+    1                       in : 0 1 2 3
+     \                     low : 0 1 2 3
+      2                    timer = 4
+     / \
+    3___4
+ 
+Whenever their is a Back edge, the low time of that node(decendent) would be updated to min of its ancestor's(connected with back edge) in time and low time of decendent.
+i.e low time = min(in_acestor, low_decendent)
+
+in  : 0 1 2 3
+low : 0 1 2 1-> that means node-4 is directly connected to it ancestor that enters at time = 1(i.e node-2)
+
+If the low-time of node-4(which is actually child of node-3) is greater than the in-time of node-3 
+which implies node-4 is not connected to its ancestor, hence, node-3-to-node-4 is bridge.
+
+in  : 0 1 2 3
+low : 0 1 1 1 
+          |__ now, node-3 is also minimize its low via node-4.
+          i.e. node-3 can also reach to as low (i.e. node-1), as can be reached by node-4.
+
+--------------------------------------------------------------------------------------------------------
+DFS Tree : Implementation
+
+#include <bits/stdc++.h>
+#define REP(i, n) for (int i = 1; i <= n; i++)
+#define P 1000000007
+#define pb push_back
+#define ii pair<int, int>
+#define vi vector<int>
+#define vii vector<ii>
+#define lli long long int
+#define endl '\n'
+#define INF 1000000000
+#define FAST_IO ios_base::sync_with_stdio(false), cin.tie(NULL)
+
+using namespace std;
+
+vector<int> adj[100];
+int in[101], low[101], vis[101];
+int timer;
+
+void dfs(int node, int par){
+	vis[node] = 1;
+	in[node] = low[node] = timer;
+	timer++;
+
+	for(int child : adj[node]){
+		if(child==par)
+			continue;
+		if(vis[child]==1){
+			// edge node->child is a back edge.
+			
+			low[node] = min(low[node], in[child]);			
+		}
+		else{
+			// edge node->child is a forward edge.
+			// Calling the dfs so that it can minmize it low-time
+			dfs(child,node);
+
+			// Check condition for bridge.
+			if(low[child] > in[node])
+				cout<<node<<" -> "<<child<<" is a bridge."<<endl;
+
+			low[node]=min(low[node], low[child]);					
+		}
+	}
+}
+
+int main()
+{
+	int n,m, a, b;
+	cin>>n>>m;
+
+	while(m--)
+		cin>>a>>b, adj[a].push_back(b), adj[b].push_back(a);
+
+	// To know which is parent of curr node in its adj lis
+	// we should also pass its parent in dfs.
+	// Since, their is no parent of root .
+	// So, you can pass anything that is invalid(In this case we're passing -1).
+	dfs(1, -1);
+
+
+}
+
+
