@@ -1,0 +1,88 @@
+--> Euler's Totient Function :
+
+Euler's Totient Function(ETF) counts the number of positive integers upto n which are
+co-prime with n.
+
+Phi(n) = number of positive integers Coprime to n 
+
+Examples :
+
+Phi(5)  = 4      GCD(1,5) = GCD(2,5) = GCD(3,5) = GCD(4,5) = 1
+Phi(10) = 4      GCD(1,10) = GCD(3,10) = GCD(7,10) = GCD(9,10) = 1
+
+------------------------------------------------------------------------------------------------------------------------
+--> Novice approach :
+
+Time Complexity = O(N*logN)
+
+int Phi(int N){
+    int cnt = 0;
+    for(int i=1;i<=N;i++){
+        if(GCD(i,N)==1)
+            cnt++;
+    }
+    return cnt;
+}
+
+------------------------------------------------------------------------------------------------------------------------
+--> Primes and Totient Function :
+
+Phi(2) = 1            => Phi(P) = P-1
+Phi(3) = 2
+Phi(5) = 4
+Phi(7) = 6
+Phi(11) = 10
+
+--> Phi(P^x) = ? if x>=1
+
+Phi(2^5) = 16
+Phi(3^5) = 162
+
+--> Phi(P^x) = P^x - number of integers not co-prime with P^x
+            = P^x - number of multiple of P
+            = P^x - (P^x/P)
+            = P^(x-1)(P-1)
+
+------------------------------------------------------------------------------------------------------------------------
+--> Multiplicative Function :
+
+An arithmetic function f(x) is called multiplicative if
+f(N*M) = f(N)*f(M)      where gcd(N,M) = 1
+
+--> Why this property is helpful?
+
+Let f(x) is multiplicative. to evaluate f(N) where,
+N = P1^x1 * P2^x2 * P3^x3 * P4^x4 *...*Pk^xk 
+
+Since, all the prime powers are Coprime with each other.
+Hence, f(N) = f(P1^x1)*f(P2^x2)*...*f(Pk^xk)
+
+--> d(N) = divisor_count_of_N
+
+N = P1^x1 * P2^x2 * P3^x3 * P4^x4 *...*Pk^xk 
+d(N) = (x1+1)*(x2+1)*(x3+1)*...*(xk+1)
+
+d(N) = d(P1^x1)*d(P2^x2)*d(P3^x3)*...*d(Pk^xk)
+
+d(P^x1) = (x1+1), d(P^x2) = (x2+1) ...
+
+------------------------------------------------------------------------------------------------------------------------
+--> Deriving formula for ETF :
+
+N = P1^x1 * P2^x2 * P3^x3 * P4^x4 *...*Pk^xk  |=>Prime Factorization of N is calculated in O(sqrt(N)) time.
+
+Euler's Totient Function is a Multiplicative Function.
+Phi(P^x) = P^(x-1)(P-1)
+
+Phi(N) = Phi(P1^x1)*Phi(P2^x2)*Phi(P3^x3)*...*Phi(Pk^xk)
+Phi(N) = P1^(x1-1)(P1-1) * P2^(x2-1)(P2-1) * P3^(x3-1)(P3-1) *...* Pk^(xk-1)(Pk-1)  
+
+Since a number can't have more than logN Primes.
+So, ofcourse in this case also there won't be more than logN Primes.
+and therafter we have to calculate the some prime raised to the power sometheing,
+which we can calculate using binary exponentation in logN time.
+Hence, the above overall approach in O(sqrt(N)*logN) time.
+
+Phi(N) = N * ((P1-1)/P1) * ((P2-1)/P2) * ((P3-1)/P3) *...* ((Pk-1)/Pk)
+|
+Now, by this formula we can calculate the Phi(N) in O(Sqrt(N)) time.
