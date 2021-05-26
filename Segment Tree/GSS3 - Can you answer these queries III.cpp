@@ -24,13 +24,22 @@ modify the i-th element in the sequence or for given x y print max{Ai + Ai+1 + .
 
 using namespace std;
 
-int ar[50001], st[4 * 50001];
+struct node
+{
+    int sum;
+    int maxlsum;
+    int maxrsum;
+    int maxisum;
+};
+
+int ar[50001];
+node st[4 * 50001];
 
 void build(int si, int ss, int se)
 {
     if (ss == se)
     {
-        st[si] = ar[ss];
+        st[si].sum = st[si].maxlsum = st[si].maxrsum = st[si].maxisum = ar[ss];
         return;
     }
 
@@ -39,14 +48,17 @@ void build(int si, int ss, int se)
     build(2 * si, ss, mid);
     build(2 * si + 1, mid + 1, se);
 
-    st[si] = st[2 * si] + st[2 * si + 1];
+    st[si].sum = st[2 * si].sum + st[2 * si + 1].sum;
+    st[si].maxlsum = max(st[2 * si].maxlsum, st[2 * si].sum + st[2 * si + 1].maxlsum);
+    st[si].maxrsum = max(st[2 * si].maxrsum + st[2 * si + 1].sum, st[2 * si + 1].maxrsum);
+    st[si].maxisum = max(max(st[2 * si].maxisum, st[2 * si + 1].maxisum), st[2 * si].maxrsum + st[2 * si + 1].maxlsum);
 }
 
 void update(int si, int ss, int se, int qi, int val)
 {
     if (ss == se)
     {
-        st[si] = val;
+        st[si].sum = st[si].maxlsum = st[si].maxrsum = st[si].maxisum = val;
         return;
     }
 
@@ -57,7 +69,10 @@ void update(int si, int ss, int se, int qi, int val)
     else
         update(2 * si + 1, mid + 1, se, qi, val);
 
-    st[si] = st[2 * si] + st[2 * si + 1];
+    st[si].sum = st[2 * si].sum + st[2 * si + 1].sum;
+    st[si].maxlsum = max(st[2 * si].maxlsum, st[2 * si].sum + st[2 * si + 1].maxlsum);
+    st[si].maxrsum = max(st[2 * si].maxrsum + st[2 * si + 1].sum, st[2 * si + 1].maxrsum);
+    st[si].maxisum = max(max(st[2 * si].maxisum, st[2 * si + 1].maxisum), st[2 * si].maxrsum + st[2 * si + 1].maxlsum);
 }
 
 int query(int si, int ss, int se, int qs, int qe)
@@ -65,7 +80,7 @@ int query(int si, int ss, int se, int qs, int qe)
     if (ss > qe || qs > se)
         return 0;
     if (ss >= qs && se <= qe)
-        return st[si];
+        return st[si].maxisum;
 
     int mid = ss + (se - ss) / 2;
 
