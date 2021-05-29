@@ -1,0 +1,41 @@
+12. Pairs : Approach
+
+Prolem Statement :
+    Given an array containing N integrs, and an number S denoting a target sum.
+    Find two distinct integrs that can pair up to form target sum.
+
+This problem can be found at google mock Interview preparation quesions(https://www.youtube.com/watch?v=XKu_SEDAykw&t=1052s)
+
+array = [10, 5, 2, 3, -6, 9, 11] , S=4
+Output = [10,-6]
+
+(1) Brute force -> O(N^2) time
+
+(2) Can we do better? Yes
+    Which algorithm should I use to do better? Sort
+    -6, 2, 3, 5, 9, 10, 11
+    __  __________________
+    N        LogN
+
+    NLogN (sort) + NLogN = O(NLogN)
+
+(3) Can we still do better? Yes 
+    Which Data Structure should I use to do better? Unordered_Set -> O(1) 
+                                                 or Unordered_Map -> O(1) 
+
+    => O(N) time -> we can't do better than O(N) because we have to atleast traverse the whole array.
+
+Now, we are using unordered_set -> we have two possiblities for unordered_set :
+                                   Either we can first store the all elements into the set,
+                                   then compairing the one by one elements of array to the set elements for required sum pair,
+                                   but in this quesions we've to find the distinct pair. So, this method is wrong.
+                                   because we can get the pair of same elements satisfying the given condition. e.g. 2 + 2 = 4 but correct ans is 10 - 6 = 4
+
+                                   or second In empty set we can start by checking the array element in set for getting the required sum,
+                                   If we get the required ans then we can stop traversing,
+                                   Else first we check if number is present in set or not,
+                                   If it is not present in the set then we can we can store it into the set.
+                    
+Why we're using unordered_set because in unordered_set<...> -> we don't need to store true or false
+but in case of hashmap i.e. unordered_map<key,value> we've to maintaing 
+key,value pairs for storing weather a number is present or not. i.e. key,val  5 - true, -6 - true 
