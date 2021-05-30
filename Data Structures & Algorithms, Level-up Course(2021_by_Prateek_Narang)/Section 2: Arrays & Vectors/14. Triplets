@@ -1,0 +1,33 @@
+14. Triplets
+
+Problem Statement :
+    Given an array containing N integers, and an number S denoting the target sum.
+    Find all distinct integers that can add up to form target sum.
+    The numbers in each triplet should be ordered in ascending order, and triplets should be ordered too.
+
+Ex - ar = [1,2,3,4,5,6,7,8,9,15] , target = 18
+    Output = [[1,2,15],[3,7,8],[4,6,8],[5,6,7]]
+
+Possible Approach :
+    
+    Brute force -> Run 3 nested for loops -> O(N^3)
+
+    Can we use prev. problem Pairs Approach to solve it? Yes -> time = O(N.N) & space = O(N)
+    Traverse the whole array elements one by one ->Then apply Pairs problem Approach.
+
+    Can we still do better? Yes 
+    Then, Instead of Data Structure unordered_map we have to use something Else.
+    First, we can sort the array , then for each element we can use two pointer Approach.
+    This takes [O(NLogN) + O(N)] time
+                  |          |
+              Bottleneck    Two Pairs    
+    
+    (1) sort(NLogN)         pair sum
+    (2) iterate a[i] ,   (a[j],a[k])->two pointer => O(N^2)
+                 |             |
+                 N             N 
+
+    Here, Sorting isn't the Bottleneck, because (NLogN < N^2) 
+        O(NLogN + N^2) = O(N^2)    and space = O(1)
+
+    In previous prob. pairs Sort is Bottleneck because (NLogN > N) 
