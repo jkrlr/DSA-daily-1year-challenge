@@ -1,0 +1,56 @@
+13. Unbounded Knapsack
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Flow :
+
+-> Recall D/f
+-> See code differenced variation
+-> Relatable Problems 
+    -> Rod Cutting
+    -> Coin change I
+    -> Coin change II
+    -> Maximum Ribbon Cut 
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Problem Statement :
+(https://practice.geeksforgeeks.org/problems/knapsack-with-duplicate-items4201/1)
+
+Unbounded Knapsack (Repetition of items allowed)
+Given a knapsack weight W and a set of n items with certain value vali and weight wti, we need to calculate minimum amount that could make up this quantity exactly. 
+This is different from classical Knapsack problem, here we are allowed to use unlimited number  of instances of an item.
+
+Examples:
+Input : W = 100 , val[]  = {1, 30}, wt[] = {1, 50}
+Output : 100
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> Recall D/f :
+
+In 0/1 Knapsack, After deciding that whether we've to take this element or not,
+                 We can't visit that element again i.e. the element is processed.
+
+But in Unbounded Knapsack, After deciding that whether we've to include this element or not.
+                           If we decide to take this element, then in this case we can re-process that element again.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> See code differenced variation :
+
+                Base case remains same as of the 0/1 Knapsack.
+
+Code :
+
+                t[n+1][w+1]
+
+0/1 Knapsack :
+
+                if(wt[i-1]<=j)
+                    t[i][j] = max (val[i-1]+ t[i-1][j-wt[i-1]] , t[i-1][j]);
+                else 
+                    t[i][j] = t[i-1][j]
+
+Unbounded Knapsack :
+
+                if(wt[i-1]<=j)
+                    t[i][j] = max (val[i-1]+ t[i][j-wt[i-1]] , t[i-1][j]);
+                else 
+                    t[i][j] = t[i-1][j]
