@@ -1,0 +1,104 @@
+--> Problem to be Discussed :
+    
+ans = Σ GCD(i,N)  ; i = 1 to N
+
+-------------------------------------------------------------------------------------------------------
+--> Brute Force Solution : Complexity = O(Q*NlogN)
+
+int res = 0;
+for(int i=i;i<=N;i++)
+    res+=gcd(i,N);
+return res;
+
+Can we do it in better time commplexity? Yes
+
+-------------------------------------------------------------------------------------------------------
+--> Better Solution : 
+
+ans = Σ GCD(i,N)  ; i = 1 to N
+We can evaluate this expresssion in O(Q*sqrt(N))
+
+-------------------------------------------------------------------------------------------------------
+--> Important Observations : 
+
+ans = Σ GCD(i,N)  ; i = 1 to N         
+
+Observation#1 : GCD(i,N) = one of the divisor of N
+
+Assume N = 12
+GCD(1, 12) = 1      GCD(5, 12) = 1      GCD(9,12)  = 3
+GCD(2, 12) = 2      GCD(6, 12) = 6      GCD(10,12) = 2
+GCD(3, 12) = 3      GCD(7, 12) = 1      GCD(11,12) = 1
+GCD(4, 12) = 4      GCD(8, 12) = 4      GCD(12,12) = 12
+
+Observation#2 : Instead of running a loop from 1 to N, 
+                We can check for each divisor d of N
+                how many numbers i are there with GCD(i,N) = d 
+
+res = 1*4 + 2*2 + 3*2 + 4*2 + 6*1 + 12*1
+
+-------------------------------------------------------------------------------------------------------
+#include<bits/stdc++.h>
+using namespace std;
+
+int phi[1000001];
+
+int getCount(int d, int N){
+
+    return phi[N/d];
+}
+
+int main (){
+    int q, N;
+    cin>>q;
+
+    // NlogN + Q*sqrt(N)
+
+    while(q--){
+        cin>>N;
+        int res = 0;
+
+        for(int i=1;i*i<=N;i++){
+            if(i%N==0){
+                int d1 = i;
+                int d2 = N/i;
+
+                res+=d1 * getCount(d1,N);
+
+                if(d1!=d2)
+                    res+= d2 * getCount(d2,N);
+            }
+        }
+        cout<<res<<endl;
+    }
+}
+
+-------------------------------------------------------------------------------------------------------
+--> How to calculate getCount(d,N) function?
+
+    --> Questions in hand :
+
+        How many integers are there from 1 to N having gcd d with N ?
+        Note : d is divisor of N 
+
+        Ans : let x1, x2,...,xm are m different integers from 1 to N such that their GCD with N is  d.
+
+        Observation : GCD(xi, N) = d , then GCD(xi/d, N/d) = 1
+
+        --> Understanding Observation :
+
+            Let N = 20 and d = 2 
+            Numbers with GCD(xi, N) = 2, 6, 14, 18
+
+            GCD(18, 20) = 2 
+            GCD(9, 10)  = 1
+
+            20 = 2 * 2 * 5
+            18 = 2 * 3 * 3
+        
+        1 <= xi <= N 
+        1 <= xi <= N 
+             --   --
+             d     d 
+        
+        => #of integers having GCD d with N = #of integers Coprime with N/d .
