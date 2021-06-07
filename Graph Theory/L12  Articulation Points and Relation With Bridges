@@ -1,0 +1,41 @@
+Articulation Points : 
+        An articulation point(or Cut vertex) is a vertex which when removed
+        makes graph disconnected Or more precisely it increases the no. of connected components.
+
+        O
+       / 
+      0 
+     / \
+    O   0
+     \ / \
+      O   O
+
+        O  
+    
+      
+    O   O
+     \ / \
+      O   O
+
+Relation B/W Bridges and Articulation point :
+
+      0---------0-----------0
+     / \       / \         / \
+    O---O     O---O       O---O
+
+      0------O  
+     / \
+    O---O
+
+    
+    
+           O     O
+           | \  / |
+           O / 0 \O
+              / \
+             O---O
+
+Conclusion :
+    1. End-points of a bridge will be articulation point if that node has degree at least 2.
+    2. It is not necessary for an articulation point to be end point of bridge.
+    3. Finding bridges algorithm can not be used for find articulation point.
