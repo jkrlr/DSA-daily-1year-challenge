@@ -1,0 +1,52 @@
+Flow :
+        Problem Statement
+        Matching
+        How to identify
+            /   \
+         0-1    unbounded
+        Code Variation(if any)
+
+-------------------------------------------------------------------------------------------------------------------------
+a. Problem Statement :
+        Example :
+                N = 8 (N is the length of rod)
+                length   | 1   2   3   4   5   6   7   8  
+                -----------------------------------------
+                price    | 1   5   8   9  10  17  17  20
+
+                Max_profit = 17(6) + 5 (2) = 22
+
+-------------------------------------------------------------------------------------------------------------------------
+b. Matching :
+        Sometimes length array is not given only N and price array is given.
+        Then we create the length array of length N by ourself having length[i]=i , i = 1 to N 
+
+        N         -> W 
+        price[]   -> val[]
+        length[]  -> wt[]
+
+        i.e. this Problem is similar as knapsack Problem.
+
+-------------------------------------------------------------------------------------------------------------------------
+c. How to identify? 0-1 or unbounded  :
+        Can we cut multiple pieces of same length? Yes 
+        So, this Problem is the Variation of unbounded knapsack Problem.
+
+-------------------------------------------------------------------------------------------------------------------------
+d. Code Variation :
+        t[n+1][W+1] -> t[n+1][length+1]
+                    =  t[N+1][N+1]
+
+                    Sometimes, we can cut pieces of few lengths only not the in the whole range of 1 to N.
+                    so, In that case we'll use : n = length.size()
+                    and W to be N as mentioned already.
+
+        t[n+1][W+1] =  t[size of(length array) + 1][length + 1]
+
+    Since, this Problem is exactly same as the unbounded knapsack Problem.
+    So, the rest of the code is same as of the unbounded knapsack Problem.
+
+    if(length[i-1]<=j)
+            t[i][j] = max(price[i-1] + t[i][j-length[i-1]], t[i-1][j]);
+    else
+        t[i][j] = t[i-1][j];
