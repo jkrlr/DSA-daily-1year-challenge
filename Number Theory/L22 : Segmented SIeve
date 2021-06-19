@@ -1,0 +1,28 @@
+Segmented Sieve :
+    Segmented Sieve is a way to generate prime numbers in a given range.
+
+    Sieve does the same why we need Segmented Sieve?
+        To generate primes upto N, we need an array of size of N in Sieve algorithm,
+        but will it work if N will be as large as 10^12? No 
+
+where is Segmented Sieve applicable?
+    Segmented Sieve will work on that areas where simple Sieve might fails because L and R is so big.
+
+    When you need to find prime numbers in range L to R where L and R can be really large
+    (like 10^12) but still R - L + 1 <= 10^6
+
+Working of Segmented Sieve :
+    step 1 : Generate all prime numbers upto sqrt(R) using Sieve.
+    step 2 : Create an array of size R-L+1 and set all elements to be 1(1: prime and 0:composite).
+    step 3 : For each prime P in 2 to sqrt(R) :
+                    for every multiple m of P in the range L to R:
+                            mark index m-L as 0
+
+Using array for range :
+    e.g. Say L = 11 and R = 20 
+         Then create an array of size 20-11+1 = 10
+         ar = {11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
+
+         what is the significant of this ar?
+         If number x is prime then , ar[x-L] = 1
+         If number x is not prime then, ar[x-L] = 0
