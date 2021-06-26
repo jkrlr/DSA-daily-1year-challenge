@@ -1,0 +1,55 @@
+Problem Statement :
+    Given N, you have to answer Q queries, in each query you will be given a number K.
+    you have to find the common divisors of N and K.
+
+    N<= 10^12 (N should be const for this prob, only K should be changed).
+    K<= 10^12
+    Q<= 5*10^5
+
+-------------------------------------------------------------------------------------------------------------------
+Approach :
+    Wheneve a question is given in number Theory => Always think in terms of
+                                                    Prime factorization, GCD, Sieve, Divisors
+    
+    Example :
+        12 3 
+        5       Q1 : 1{1}
+        8       Q2 : 3{1,2,4}
+        6       Q3 : 4{1,2,3,6}
+
+    ---------------------------------------------------------------------------------------------------------------
+    Naive Approach :
+
+        a)  Step 1 : Generate list of divisors on N(can be done in O(sqrt(N)))
+            for each query:
+                for each divisor d of N:
+                    if it divides K:
+                        cnt++
+
+        Complexity per query : O(N^1/3)    , Space = O(logN) => for storing the total divisors of N.
+        
+        ------------------------------------------------------------------------------------------------------
+        b)  Step 1 : Calculate GCD between N and K, let it be G 
+            Step 2 : find number of divisors of G
+
+        Complexity per query : O(LogN + sqrt(G))    , Space = O(1)
+    
+    --------------------------------------------------------------------------------------------------------------
+    Optimal Approach : Key => Prime factorization
+
+        Find and store Prime factorization of N                     // Time = O(logN) , Space = O(logN)
+        e.g. 1800 = {(2,3),(3,2),(5,2)} 
+
+        How many Primes and be there in N?
+        Ans : LogN (It's the upper bound in worst case, not the exact count of divisors).
+
+        Step 1 : using each Prime p in Prime factorization of N,  // Time = O(LogN) => for Primes 
+                    factorize K                                  // Time = O(LogP) => O(LogN) in worst case, Space = O(LogN)
+        e.g. 1800 = {(2,3),(3,2),(5,2)} 
+             200  = {(2,3),(3,0),(5,1)} 
+
+        Step 2 : for each Prime find minimum count, and Calculate total divisors  // Time = O(LogN) => for multiplication 
+        {(2,3),(3,0),(5,1)} 
+
+        Complexity per query : LogN + (LogN)^2 + LogN = O((logN)^2)    , Space = LogN + LogN = O(LogN)
+
