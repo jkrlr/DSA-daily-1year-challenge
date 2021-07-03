@@ -3,7 +3,7 @@
 // After Sorting : 3, 303, 30, 11, 10
 // Output : 3303201110 => largestNum
 
-// Time = O(Sort) = O(NlogN * log(Max_Size_of_Int)) = O(NlogN*9) = O(NlogN)  , Space = O(1) // N is length of array
+// Time = O(Sort + N*N) = O(NlogN * log(Max_Size_of_Int)) = O(NlogN*9) = O(NlogN + N*N) = O(N^2) , Space = O(1) // N is length of array
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -37,7 +37,7 @@ string concatenate(vector<int> numbers)
 
     string largestNum = "";
     for (int num : numbers)
-        largestNum += to_string(num);
+        largestNum += to_string(num); //Typically, slicing and concatenating strings require O(n) time
 
     return largestNum;
 }

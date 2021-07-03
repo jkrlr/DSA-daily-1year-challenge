@@ -1,6 +1,6 @@
 // https://leetcode.com/problems/string-compression/
 
-// Time = O(N), Space = O(1)
+// Time = O(N^2), Space = O(1)
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -22,7 +22,7 @@ string compressString(const string &str)
         }
 
         // Append the char+ freqofChar into res
-        res += (ch + to_string(cnt));
+        res += (ch + to_string(cnt)); // O(n)
 
         // Reset the values
         ch = str[i];
