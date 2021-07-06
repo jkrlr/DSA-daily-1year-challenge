@@ -24,17 +24,8 @@ std::string breakPalindrome(std::string palindrome)
         }
     }
 
-    // Traverse from R->Mid:
-    //     if the 1st last no. which is smaller than b replace it with b
-    for (int i = n - 1; i >= mid; i--)
-    {
-        if (palindrome[i] < 'b')
-        {
-            palindrome[i] = 'b';
-            return palindrome;
-        }
-    }
+    palindrome[n - 1] = 'b'; //if all 'a'
 
     // Already Given string is Not Palindrome
-    return palindrome;
+    return "The given string is not Palindrome!";
 }
