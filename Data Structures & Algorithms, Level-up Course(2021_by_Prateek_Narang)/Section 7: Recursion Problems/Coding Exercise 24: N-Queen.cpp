@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool IsSafe(int row, int col, vector<string> board, int n)
+/* bool IsSafe(int row, int col, vector<string> board, int n)
 {
     // check for upper diagonal
     int duprow = row;
@@ -72,5 +72,55 @@ int nQueen(int n)
     }
 
     solveNQueen(0, board, ans, n);
+    return ans.size();
+} */
+
+// More Efficient Solution using Hashing
+
+void solveNQueen(int col, vector<string> &board, vector<vector<string>> &ans, vector<int> &leftRow, vector<int> &upperDiagonal, vector<int> &lowerDiagonal, int n)
+{
+    // Base Case
+    if (col == n)
+    {
+        // Store the pattern
+        ans.push_back(board);
+        return;
+    }
+
+    // Recursive Case
+    // Try to place Queen at each column
+    for (int row = 0; row < n; row++)
+    {
+        if (leftRow[row] == 0 && lowerDiagonal[row + col] == 0 && upperDiagonal[n - 1 + col - row] == 0)
+        {
+            board[row][col] = 'Q';
+            leftRow[row] = 1;
+            lowerDiagonal[row + col] = 1;
+            upperDiagonal[n - 1 + col - row] = 1;
+
+            solveNQueen(col + 1, board, ans, leftRow, upperDiagonal, lowerDiagonal, n);
+
+            board[row][col] = '.';
+            leftRow[row] = 0;
+            lowerDiagonal[row + col] = 0;
+            upperDiagonal[n - 1 + col - row] = 0;
+        }
+    }
+}
+
+int nQueen(int n)
+{
+    vector<vector<string>> ans;
+    vector<string> board(n);
+
+    string s(n, '.');
+    for (int i = 0; i < n; i++)
+    {
+        board[i] = s;
+    }
+
+    vector<int> leftRow(n, 0), upperDiagonal(2 * n - 1, 0), lowerDiagonal(2 * n - 1, 0);
+
+    solveNQueen(0, board, ans, leftRow, upperDiagonal, lowerDiagonal, n);
     return ans.size();
 }
