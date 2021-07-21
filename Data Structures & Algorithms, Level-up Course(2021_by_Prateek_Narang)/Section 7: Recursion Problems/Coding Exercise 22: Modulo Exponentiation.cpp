@@ -23,17 +23,18 @@ using namespace std;
     return res;
 } */
 
-//Recursive Solution
+//Recursive Solution : Time = O(logb) , Space = O(logb)
 long long int powerModulo(int a, int b)
 {
     // Base Case
     if (b == 0)
         return 1;
 
-    long long tmp = powerModulo(a, b / 2);
-    long long result = ((tmp % mod) * (tmp % mod)) % mod;
+    long long halfPower = powerModulo(a, b / 2);
+    long long halfPowerSquare = ((halfPower % mod) * (halfPower % mod)) % mod;
 
     if (b % 2 == 1)
-        result = ((result % mod) * (a % mod)) % mod;
-    return result;
+        return ((a % mod) * (halfPowerSquare % mod)) % mod;
+
+    return halfPowerSquare;
 }
