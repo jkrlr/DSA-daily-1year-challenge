@@ -1,3 +1,6 @@
+// https://leetcode.com/problems/middle-of-the-linked-list/
+// Time = O(N) in a single pass , Space = (1)
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -19,7 +22,7 @@ int getMid(node *head)
     node *slow = head;
     node *fast = head;
 
-    while (fast->next != NULL)
+    while (fast != NULL and fast->next != NULL)
     {
         slow = slow->next;
         fast = fast->next->next;

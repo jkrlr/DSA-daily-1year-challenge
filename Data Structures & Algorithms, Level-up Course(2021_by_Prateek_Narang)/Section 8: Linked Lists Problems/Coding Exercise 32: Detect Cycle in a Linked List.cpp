@@ -1,3 +1,6 @@
+// https://leetcode.com/problems/linked-list-cycle/submissions/
+// Time = O(N), Space = O(1)
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -14,9 +17,9 @@ public:
     }
 };
 
-// Time = O(N), Space = O(1)
 bool containsCycle(node *head)
 {
+    // Empty List
     if (head == NULL)
     {
         return false;
