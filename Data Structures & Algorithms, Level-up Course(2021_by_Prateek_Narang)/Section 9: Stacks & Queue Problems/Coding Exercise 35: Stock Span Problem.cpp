@@ -1,30 +1,61 @@
+// https://leetcode.com/problems/online-stock-span/
+// Time = O(N), Space = O(N)
 #include <bits/stdc++.h>
 using namespace std;
-vector<int> stockSpan(vector<int> v)
+vector<int> stockSpan(vector<int> prices)
 {
-    int n = v.size();
-    vector<int> span(n, 0);
+    int n = prices.size();
+    vector<int> span(n);
 
-    //stack<pair<index,price_of_index>>
-    stack<pair<int, int>> s;
+    stack<int> s; // indices of the days
 
-    for (int i = 0; i < n; i++)
+    s.push(0);
+    span[0] = 1;
+
+    //loop for rest of the days ->O(N)-> Push and Pop each element only once!
+    for (int i = 1; i < n; i++)
     {
-        while (!s.empty() && s.top().second <= v[i])
+        int currentPrice = prices[i];
+        while (!s.empty() && prices[s.top()] <= currentPrice)
         {
             s.pop();
         }
 
-        int curr_span_val;
-        if (s.empty())
+        if (!s.empty())
         {
-            curr_span_val = i + 1;
+            int prevHighest = s.top();
+            span[i] = i - prevHighest;
         }
         else
         {
-            curr_span_val = i - s.top().first;
+            span[i] = i + 1;
         }
-
-        span.push_back(curr_span_val);
+        //push this element into the stack
+        s.push(i);
     }
+
+    return span;
 }
+
+/* LeetCode: 
+class StockSpanner {
+public:
+    stack<pair<int,int>> s; // prices,indices of the days
+
+    StockSpanner() {
+        
+    }
+    
+    int next(int price) {
+            
+            int res = 1;
+
+            while (!s.empty() && s.top().first<=price)
+            {
+                res+=s.top().second;
+                s.pop();
+            }
+            s.push({price,res});
+            return res;
+    }
+}; */
