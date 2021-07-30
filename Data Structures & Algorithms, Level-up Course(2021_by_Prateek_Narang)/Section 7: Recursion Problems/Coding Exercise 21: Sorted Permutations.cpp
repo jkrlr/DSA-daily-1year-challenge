@@ -1,3 +1,9 @@
+// https://leetcode.com/problems/permutations/
+// Time = O(n^2 * n!) , Space =(n) => depth of recursion
+
+/* Calling SortedPermutationsHelper O(n * n!) times (as an upper bound) and each call takes O(n) time for string concatenation, 
+    the total runtime will not exceed O(n^2 * n!). */
+
 #include <bits/stdc++.h>
 using namespace std;
 

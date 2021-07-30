@@ -1,7 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-/* bool IsSafe(int row, int col, vector<string> board, int n)
+/* Time =)(N^N), Space = (N^2)
+bool IsSafe(int row, int col, vector<string> board, int n)
 {
     // check for upper diagonal
     int duprow = row;
@@ -75,7 +76,7 @@ int nQueen(int n)
     return ans.size();
 } */
 
-// More Efficient Solution using Hashing
+// More Efficient Solution using Hashing : Time = O(N!), Space = (N^2)
 
 void solveNQueen(int col, vector<string> &board, vector<vector<string>> &ans, vector<int> &leftRow, vector<int> &upperDiagonal, vector<int> &lowerDiagonal, int n)
 {

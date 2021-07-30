@@ -1,4 +1,5 @@
-// Time =O(n), Space = O(n)
+// https://practice.geeksforgeeks.org/problems/first-non-repeating-character-in-a-stream1216/1#
+// Time = O(26*n), Space = O(26)
 
 #include <bits/stdc++.h>
 using namespace std;
