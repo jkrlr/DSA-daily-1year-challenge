@@ -8,7 +8,7 @@ using namespace std;
 class Node{
 public:
 	char data;
-	unordered_map<char,Node*>m; 
+	unordered_map<char,Node*>children; 
 	bool isTerminal;
  
 	Node(char d){
@@ -30,11 +30,11 @@ public:
 		Node *temp = root;
 		
 		for(char ch: word){
-			if(temp->m.count(ch)==0){
+			if(temp->children.count(ch)==0){
 				Node *newNode = new Node(ch);
-				temp->m[ch] = newNode;
+				temp->children[ch] = newNode;
 			}
-			temp = temp->m[ch];
+			temp = temp->children[ch];
 		}
 		temp->isTerminal = true;
 	}
@@ -43,10 +43,10 @@ public:
 		Node *temp = root;
 		
 		for(char ch : word){
-			if(temp->m.count(ch)==0){
+			if(temp->children.count(ch)==0){
 				return false;
 			}
-			temp = temp->m[ch];
+			temp = temp->children[ch];
 		}
 		
 		return temp->isTerminal;
