@@ -5,18 +5,18 @@ using namespace std;
 
 class Graph{
     int V;
-    list<int> *l;
+    list<int> *adjList;
 
 public:
     Graph(int v){
         V = v;
-        l = new list<int>[V];
+        adjList = new list<int>[V];
     }
 
     void addEdge(int i, int j, bool undir=true){
-        l[i].push_back(j);
+        adjList[i].push_back(j);
         if(undir){
-            l[j].push_back(i);
+            adjList[j].push_back(i);
         }
     }
 
@@ -25,7 +25,7 @@ public:
         for (int i = 0; i < V;i++){
             cout << i << "-->";
             //every element of ith linked list
-            for(auto node:l[i]){
+            for(auto node:adjList[i]){
                 cout << node << ",";
             }
             cout << endl;
