@@ -1,0 +1,9 @@
+Time = 60 minutes (EDG - Intern : Computer Science Track)
+2 Coding questions + 12 Programming MCQ'safe
+
+    1. Distinct Pairs whose sum is equal to given k
+        e.g. ar = [1,2,3,4,9,7,1], k = 10 => pairs = {1,9}(and {9,1} both are same), {3,7} => ans = 2
+    2. Who Wins? 
+        e.g. str ="wwwbbbwww" , wincey removes adjacent w if w has adjacent w in both sides and bob removes adjacent b if b has adjacent b in both sides.
+        wincey plays first move then bob and the player who can't able to play their move -> that lost the game.
+            final str = "wwbbww" => wincey Wins
