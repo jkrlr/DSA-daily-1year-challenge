@@ -1,4 +1,4 @@
-// Time = O(M*N*n*w), Space = O(n*w + M*N)
+// Time = O(M*N + n*w), Space = O(n*w + M*N)
 
 #include <bits/stdc++.h>
 using namespace std;
