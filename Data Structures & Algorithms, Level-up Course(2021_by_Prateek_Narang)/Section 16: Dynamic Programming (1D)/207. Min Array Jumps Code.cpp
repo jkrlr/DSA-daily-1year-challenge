@@ -12,57 +12,64 @@
 using namespace std;
  
 // Recursive - Time = O(n^n), Space = O(n)
-int minJumpsRec(vector<int> &ar, int start){
+int minJumpsRec(vector<int> &ar, int idx){
 	// base case
-	if(start == ar.size()){
+	if(idx == ar.size()){
 		return 0;
 	}
-    if(start > ar.size()){
+    if(idx > ar.size()){
         return INT_MAX;
     }
 
     // recursive case
-	int minJumps = INT_MAX-1;
-	for(int jump=1; jump<=ar[start]; jump++){
-		int currJumps = minJumpsRec(ar,start + jump);
-		minJumps = min(minJumps, currJumps);
+	int steps = INT_MAX;
+    int maxjump = ar[idx];
+
+	for(int jump=1; jump<=maxjump; jump++){
+        int subproblem = minJumpsRec(ar, idx + jump);
+        if(subproblem!=INT_MAX){
+            steps = min(steps, 1 + subproblem);
+        }
 	}
 	
-	return 1 + minJumps;
+	return steps;
 }
  
 // Top-Down - Time = O(n^2), Space = O(n)
-int minJumpsTD(vector<int> &ar, vector<int> &dp, int start){
+int minJumpsTD(vector<int> &ar, vector<int> &dp, int idx){
 	// base case
-	if(start == ar.size()){
+	if(idx == ar.size()){
 		return 0;
 	}
-    if(start > ar.size()){
+    if(idx > ar.size()){
         return INT_MAX;
     }
  
 	// check if subproblem is precomputed
-	if(dp[start]!=0){
-		return dp[start];
+	if(dp[idx]!=0){
+		return dp[idx];
 	}
  
-	int minJumps = INT_MAX-1;
-	for(int jump=1; jump<=ar[start]; jump++){
-		int currJumps = minJumpsTD(ar,dp,start + jump);
-		minJumps = min(minJumps, currJumps);
-	}
-	
-	return dp[start] = 1 + minJumps;
+	int steps = INT_MAX;
+    int maxjump = ar[idx];
+    for (int jump = 1; jump <= maxjump; jump++){
+        int subproblem = minJumpsTD(ar, dp, idx + jump);
+        if(subproblem!=INT_MAX){
+            steps = min(steps, 1 + subproblem);
+        }
+    }
+
+    return dp[idx] = steps;
 }
  
 int main(){
 	vector<int> ar = {3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 2, 5};
-	int start  = 0;
+	int idx  = 0;
 	int n = ar.size();
 	vector<int> dp(n,0);
 	
-	cout<<minJumpsRec(ar,start)<<endl;
-	cout<<minJumpsTD(ar,dp,start)<<endl;
+	cout<<minJumpsRec(ar,idx)<<endl;
+	cout<<minJumpsTD(ar,dp,idx)<<endl;
 	// cout<<minJumpsBU(ar)<<endl;
     // cout << minJumpsGreedy(ar) << endl;
 }
