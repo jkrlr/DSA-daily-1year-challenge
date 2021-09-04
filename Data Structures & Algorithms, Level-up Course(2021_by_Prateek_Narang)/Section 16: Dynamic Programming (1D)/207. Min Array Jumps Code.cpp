@@ -1,5 +1,11 @@
 // https://practice.geeksforgeeks.org/problems/minimum-number-of-jumps-1587115620/1
 // This problems can be solved using greedy in Time = O(n), Space = O(1)
+// This problem can also be solved in Time = O(n), Space = O(1) using BFS
+// https://leetcode.com/problems/jump-game-ii/
+
+// Similar question - solve this one also in next visit
+// https://leetcode.com/problems/frog-jump/
+
 /* 
 *DP question
 *Can be solved using Greedy
