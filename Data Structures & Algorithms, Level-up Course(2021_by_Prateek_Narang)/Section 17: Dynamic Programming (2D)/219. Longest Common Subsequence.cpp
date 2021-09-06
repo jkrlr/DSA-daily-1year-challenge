@@ -1,8 +1,14 @@
+// https://leetcode.com/problems/longest-common-subsequence/
+
+/* In next round solve this similar problem
+https://leetcode.com/problems/shortest-common-supersequence/
+*/
 #include <iostream>
 #include <vector>
 #include <algorithm>
 using namespace std;
 
+// Recursive - Time = O(2^n), Space = O(n) , Here n = max(s1.length(), s2.length())
 int LongestCommonSubsequence(string s1, string s2, int i, int j)
 {
     // base case
@@ -27,6 +33,7 @@ int LongestCommonSubsequence(string s1, string s2, int i, int j)
     return lcs;
 }
 
+// Top-Down - Time = O(m*n), Space = O(m*n) , Here m = s1.length(), n = s2.length()
 int LongestCommonSubsequenceTD(string s1, string s2, int i, int j, vector<vector<int>> &dp)
 {
     // base case
@@ -55,6 +62,7 @@ int LongestCommonSubsequenceTD(string s1, string s2, int i, int j, vector<vector
     return dp[i][j] = lcs;
 }
 
+// Bottom-Up - Time = O(m*n), Space = O(m*n)
 int LongestCommonSubsequenceBU(string s1, string s2)
 {
     int n1 = s1.length();
