@@ -5,6 +5,8 @@
 // Idea :- Problems ask you to find maximum substring of 'T' which contains at most k 'F' or maximum substring of 'F' which contains at most k 'T'.
 // I just used two seprate sliding windows for this.
 
+// Time = O(N), Space = O(1)
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -13,41 +15,37 @@ public:
     int maxConsecutiveChars(string str, int k, char ch){
         int n = str.size();
         int left = 0, right = 0;
-        int currentWindowSize = 0;
         int maxWindowSize = 0;
         int countOfOperation = 0;
 
         while (right < n){
-            // Expand window from right 
-            if(str[right] == ch){
-                right++;
-                currentWindowSize++;
-            }
-            else if(countOfOperation <= k){
+
+            // process the current character
+            if(str[right]==ch){
                 countOfOperation++;
-                right++;
-                currentWindowSize++;
             }
 
             // Compress window from left
-            else {
-                if(str[left] != ch){
+            while(countOfOperation > k){
+                if(str[left]==ch){
                     countOfOperation--;
                 }
-
                 left++;
-                currentWindowSize--;
             }
 
-            if(countOfOperation<=k)
-                maxWindowSize = max(maxWindowSize, currentWindowSize);
+            int currentWindowSize = right - left + 1;
+            maxWindowSize = max(maxWindowSize, currentWindowSize);
+
+            // Expand window from right
+            right++;
         }
+
         return maxWindowSize;
     }
 
     int maxConsecutiveAnswers(string answerKey, int k) {
-        int maxT = maxConsecutiveChars(answerKey, k, 'T');
-        int maxF = maxConsecutiveChars(answerKey, k, 'F');
+        int maxT = maxConsecutiveChars(answerKey, k, 'F');
+        int maxF = maxConsecutiveChars(answerKey, k, 'T');   
 
         return max(maxT, maxF);
     }
