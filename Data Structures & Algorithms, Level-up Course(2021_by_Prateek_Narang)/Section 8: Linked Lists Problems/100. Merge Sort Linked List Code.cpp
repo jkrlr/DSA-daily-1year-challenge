@@ -14,7 +14,7 @@ public:
     }
 };
 
-//-------MergeTwoSortedLinkedList----// Time = O(NLogN) and Space = O(LogN)
+//-------MergeTwoSortedLinkedList----// Time = O(n + m) and Space = O(n + m)
 node *merge(node *head1, node *head2)
 {
     // base case
@@ -28,7 +28,7 @@ node *merge(node *head1, node *head2)
     }
 
     // recursive case
-    node *head;
+    node *head;         // O(1) space in each recursive stack
 
     if (head1->data < head2->data)
     {
@@ -62,6 +62,8 @@ node *midPoint(node *head)
     return slow;
 }
 
+//-------In Place MergeSort on LL ----// Time = O(NLogN) and Space = O(N)
+
 node *mergeSort(node *head)
 {
     /* base case */
@@ -72,7 +74,7 @@ node *mergeSort(node *head)
 
     /* recursive case */
     //find mid
-    node *mid = midPoint(head); // O(N) Time
+    node *mid = midPoint(head); // O(n) Time + O(1) Space at each recursive call stack 
 
     //break at mid
     node *left = head;
@@ -84,5 +86,6 @@ node *mergeSort(node *head)
     right = mergeSort(right);
 
     //merge
-    return merge(left, right);
+    return merge(left, right);  // O(n) Time + O(n) Recursive Space at each recursive call stack 
+
 }
