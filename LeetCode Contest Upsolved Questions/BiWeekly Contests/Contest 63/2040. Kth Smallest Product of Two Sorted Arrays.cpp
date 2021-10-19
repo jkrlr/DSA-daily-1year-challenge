@@ -50,6 +50,8 @@ public:
                 rightIndex = midIndex - 1;
             }
         }
+
+        return resultIndex + 1;
     }
 
     int findMinIndex(vector<int>& nums2, long long num, long long midVal){
@@ -97,9 +99,9 @@ public:
     }
 
     long long kthSmallestProduct(vector<int>& nums1, vector<int>& nums2, long long k) {
-        long long lo = (long long)-1e10;
-        long long hi = (long long)1e10;
-        int result = -1;
+        long long lo = -1e10;
+        long long hi = 1e10;
+        long long result = -1;
 
         while(lo <= hi){
 
