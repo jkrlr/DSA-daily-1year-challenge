@@ -58,12 +58,12 @@ public:
         int networkIdleTime = 0;
 
         for(int i = 1; i < patience.size(); i++){
-            int sentMsgCount = (2 * time[i] - 1) / patience[i];
+            int extraSentMsgCount = (2 * time[i] - 1) / patience[i];
 
-            int lastMsgFromithNodeOutTime = sentMsgCount * patience[i];
-            int lastMsgFromithNodeInTime = lastMsgFromithNodeOutTime + 2 * time[i];   // 2*time[i] => going + returning time
+            int lastExtraMsgOutTime = extraSentMsgCount * patience[i];
+            int lastMsgInTime = lastExtraMsgOutTime + 2 * time[i];   // 2*time[i] => going + returning time
 
-            networkIdleTime = max(networkIdleTime, lastMsgFromithNodeInTime);
+            networkIdleTime = max(networkIdleTime, lastMsgInTime);
         }
 
 
