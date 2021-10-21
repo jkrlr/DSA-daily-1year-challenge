@@ -26,6 +26,12 @@ char *mystrtok(char *str, char delim)
         {
             token[i] = '\0';
             input = input + i + 1;
+
+            // When multiple delim are consecuative in input, skip all those
+            // e.g. (Hello  World   !   !), should return (Hello, World, !, !) 
+            while(input[0]==delim){
+            	input +=1;
+            }
             return token;
         }
     }
