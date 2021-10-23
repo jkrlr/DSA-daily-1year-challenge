@@ -1,5 +1,5 @@
 // https://leetcode.com/problems/subsets/
-// Time = O(2^N), Space = O(2^N)
+// Time = O(N*2^N), Space = O(2^N)
 
 #include <iostream>
 #include <vector>
@@ -18,7 +18,7 @@ void subsequences(string s, string o, vector<string> &v)
 
     // Recursive Case
     char ch = s[0];
-    string reduced_input = s.substr(1);
+    string reduced_input = s.substr(1); // O(N)
 
     // include
     subsequences(reduced_input, o + ch, v);

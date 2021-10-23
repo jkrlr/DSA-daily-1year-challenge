@@ -26,6 +26,5 @@ std::string breakPalindrome(std::string palindrome)
 
     palindrome[n - 1] = 'b'; //if all 'a'
 
-    // Already Given string is Not Palindrome
-    return "The given string is not Palindrome!";
+    return palindrome;
 }

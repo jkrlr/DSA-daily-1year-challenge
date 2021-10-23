@@ -1,6 +1,6 @@
 // https://leetcode.com/problems/minimum-window-substring/
 
-// Time = O(n+m), Space=O(n)
+// Time = O(n+m), Space=O(1)
 
 #include <iostream>
 #include <string>

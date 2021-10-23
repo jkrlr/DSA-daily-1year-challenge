@@ -15,7 +15,7 @@ string compressString(const string &str)
     for (int i = 0; i < str.length(); i++)
     {
         // count the freq of char
-        while (ch == str[i] && i < str.length())
+        while (i < str.length() && ch == str[i])
         {
             cnt++;
             i++;
