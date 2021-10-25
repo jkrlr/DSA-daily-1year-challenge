@@ -5,8 +5,15 @@
 // Tags - BFS, Topological Sorting
 
 // What this problem wants to teach me?
+/*  How to solve topological sorting problems using queue + indegree concept.
 
-// Time = O(V+E), Space = O(V+E) , where E == N
+    How to apply topological sorting for graphs having dependency of current node on some previous nodes.
+ 
+    How to build adjList by starting from 0 to n-1 nodes, when nodes are given from 1 to n
+    by substracting 1 from each node so that it will be from 0..n-1 and we can use distance array result 
+    directly without substracting 1 from each node to access the result and switch to more familiar 0 index based indexing. */
+
+// Time = O(V+E), Space = O(V+E) , where V == N
 
 #include<bits/stdc++.h>
 using namespace std;
