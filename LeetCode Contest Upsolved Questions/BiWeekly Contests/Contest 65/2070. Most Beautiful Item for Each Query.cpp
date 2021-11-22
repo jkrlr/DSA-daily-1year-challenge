@@ -25,7 +25,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-// Sorting | Time - O(NLogN + MLogM + (N+M)), Space - O(2N)
+// Sorting | Time - O(NLogN + MLogM + (N+M)), Space - O(2*N)
 class Solution {
 public:
     vector<int> maximumBeauty(vector<vector<int>>& items, vector<int>& queries) {

@@ -15,7 +15,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-// Binary Search + Greedy | Time = O(Log(min(m,n))*m*Log(m)), Space = O(m)-for multiset of wokers
+// Binary Search + Greedy | Time = O(Log(min(m,n))*m*Log(m)), Space = O(m) - for multiset of wokers
 class Solution {
 public:
     bool canBeAssigned(vector<int>& tasks, vector<int>& workers, int pills, int strength, int k) {
