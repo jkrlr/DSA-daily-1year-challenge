@@ -25,7 +25,7 @@ In one strongly connected component , Only one Node is Head node and for Head no
 
 No. of strongly connected components in Graph == The No. of nodes whose dis[node]==low[node] */
 
-//Tarjan's Algorithm - Works for directed Graph | Time: O(V+E) , Space - O(V+E)
+//Tarjan's Algorithm - Works for both Directed as well as Undirected Graph | Time: O(V+E) , Space - O(V+E)
 void DFS(int u, vector<vector<int>>& graph, vector<int>& disc, vector<int>& low, stack<int>& stk, vector<bool>& presentInStack, int& time){
   // Process a Node
 	disc[u] = low[u] = time;
