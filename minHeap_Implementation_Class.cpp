@@ -1,4 +1,7 @@
 // https://leetcode.com/playground/oV6Thz5S
+
+// Heap is a Complete Binary Tree, In which we fill the elments from Left--->Right and Top--->Bottom manner.
+
 /* 
 A common misconception is that a Heap is the same as a Priority Queue, which is not true. 
 A priority queue is an abstract data type(ADT), while a Heap is a data structure. 
