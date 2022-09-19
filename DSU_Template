@@ -1,0 +1,33 @@
+class DisjointSetUnion{
+private:
+    vector<int>parent;
+public:
+    DisjointSetUnion(){
+        parent.resize(100001,-1);
+    }
+    
+    void _union(int x , int y){
+        int root1 = find(x);
+        int root2 = find(y);
+        
+        if(root1==root2){
+            return;
+        }
+        
+        else if(parent[root2] < parent[root1]){
+            parent[root2] += parent[root1];
+            parent[root1] = root2;
+        }
+        else{
+            parent[root1] += parent[root2];
+            parent[root2] = root1;            
+        }
+    }
+
+    int find(int x){
+        if(parent[x] < 0){
+            return x;
+        }
+        return parent[x] = find(parent[x]);
+    }
+};
